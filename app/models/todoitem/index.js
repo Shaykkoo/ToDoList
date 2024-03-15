@@ -17,7 +17,7 @@ const ToDoItem = sequelize.define('Todoitem', {
         status: {
             type: DataTypes.BOOLEAN,
             allowNull: false,
-            default: true
+            defaultValue: true
         },
         listId: {
             type: DataTypes.UUID,

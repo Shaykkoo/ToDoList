@@ -20,17 +20,12 @@ exports.signIn = async (req, res) => {
         return res.status(400).json({msg: 'BAD REQUEST'})
     }
 }
-/* exports.signUp = async (req,res) => {
-    const { nom, prenom, pseudo, email, password, fullName, token} = req.body
+exports.signUp = async (req,res) => {
+    const { email, password,} = req.body
     try {
-        const user = await UserModel.create({
-            nom,
-            prenom,
-            pseudo,
+        const user = await userModel.create({
             email,
             password: hashPassword(password),
-            fullName,
-            token
         })
         if (!user.id){
             res.status(400).json({ msg: 'BAD REQUEST'})
@@ -41,4 +36,3 @@ exports.signIn = async (req, res) => {
         res.status(400).json({ msg: 'BAD REQUEST ' + e.message})
     }
 }
- */

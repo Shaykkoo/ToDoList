@@ -1,29 +1,34 @@
 const jwt = require('jsonwebtoken');
 const todolistModel = require('../../models/todolist')
+const todoitemModel = require('../../models/todoitem')
+
 const UserModel = require('../../models/user')
 
-
-
-
 exports.getAll = async (req, res) => {
-    return res.status(200).json({ msg: 'OK', todolists: await todolistModel.findAll()})
+    return res.status(200).json({ msg: 'OK', todolists: await todolistModel.findAll(), todoitems: await todoitemModel.findOne()})
 }
 
 exports.create = async (req, res) => {
+    // get body content of request
     let authHeader = req.headers['authorization'];
-    let token = authHeader && authHeader.split(' ')[1];
+    let token = authHeader && authHeader.split(' ')[1]; // Extraction du token à partir du header d'autorisation
 
     if (token) {
         req.token = token;
-        console.log(token) 
+        console.log(token) // Ajout du token à l'objet req pour le rendre disponible dans les routes suivantes
     }
+
+      // Vérifier et décoder le token
+
 
       if (token) {
           jwt.verify(token, process.env.SECRET_PASS,async (err, decoded) => {
               if (err) {
                   res.status(401).json({ error: 'Token invalide' });
               } else {
+                  // Le token est valide, vous pouvez accéder aux informations décryptées dans l'objet 'decoded'
                   console.log(decoded.id)
+                  // get body content of request
             const { nom } = req.body
             try {
                 const todolist = await todolistModel.create({
