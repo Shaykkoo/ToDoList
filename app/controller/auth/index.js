@@ -1,7 +1,7 @@
 const UserModel = require('../../models/user');
 const { checkPassword } = require('../../utils/bcrypt');
 const { jwtSign } = require("../../config/jwtConfig");
-const {hashPassword} = require("../../utils/bcrypt");
+const { hashPassword } = require("../../utils/bcrypt");
 
 
 exports.signIn = async (req, res) => {
@@ -23,7 +23,7 @@ exports.signIn = async (req, res) => {
 exports.signUp = async (req,res) => {
     const { email, password,} = req.body
     try {
-        const user = await userModel.create({
+        const user = await UserModel.create({
             email,
             password: hashPassword(password),
         })

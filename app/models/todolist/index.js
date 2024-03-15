@@ -4,8 +4,8 @@ const sequelize = require('../../config/db'),
 
 const ToDoList = sequelize.define('Todolist', {
         id: {
-            type: DataTypes.UUID,
-            defaultValue: DataTypes.UUIDV4,
+            type: DataTypes.INTEGER,
+            autoIncrement:true,
             allowNull: false,
             primaryKey: true
         },
@@ -21,12 +21,11 @@ const ToDoList = sequelize.define('Todolist', {
                 key: 'id'
             }
         },
-            
     }, {timestamps: true})
 
 ToDoList.belongsTo(UserModel, {
     foreignKey: 'userId',
-    as: 'article_belongsTo_user'
+    as: 'list_belongsTo_user'
 })
 
 UserModel.hasMany(ToDoList, {

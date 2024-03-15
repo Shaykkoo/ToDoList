@@ -5,8 +5,8 @@ const sequelize = require('../../config/db'),
 
 const ToDoItem = sequelize.define('Todoitem', {
         id: {
-            type: DataTypes.UUID,
-            defaultValue: DataTypes.UUIDV4,
+            type: DataTypes.INTEGER,
+            autoIncrement:true,
             allowNull: false,
             primaryKey: true
         },
@@ -20,7 +20,7 @@ const ToDoItem = sequelize.define('Todoitem', {
             defaultValue: true
         },
         listId: {
-            type: DataTypes.UUID,
+            type: DataTypes.INTEGER,
             allowNull: false,
             references: {
                 model: TodolistModel,
